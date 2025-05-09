@@ -1,9 +1,9 @@
+
 import type { Metadata } from 'next';
-import { GeistSans } from 'geist/font/sans';
-// import { GeistMono } from 'geist/font/mono'; // Already removed
-import '../globals.css'; // Adjusted path for globals.css
+// Removed GeistSans import, it's handled by the root layout
+// Removed globals.css import, it's handled by the root layout
 import { AppLayout } from '@/components/layout/app-layout';
-import { Toaster } from "@/components/ui/toaster"; // Add Toaster here
+// Toaster is already included within AppLayout, so it's removed from here.
 
 export const metadata: Metadata = {
   title: 'Faculdade para Todos',
@@ -16,13 +16,11 @@ export default function AuthenticatedAppLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${GeistSans.variable}`}>
-      <body className="antialiased">
-        <AppLayout>
-          {children}
-        </AppLayout>
-        <Toaster /> {/* Toaster for authenticated app sections */}
-      </body>
-    </html>
+    <AppLayout>
+      {children}
+    </AppLayout>
+    // The <Toaster /> component was removed from here because 
+    // it's already present in the AppLayout component (src/components/layout/app-layout.tsx)
   );
 }
+
