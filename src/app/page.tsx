@@ -1,11 +1,28 @@
+"use client";
 import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowRight, BookOpenText, Gamepad2 } from "lucide-react";
 import Link from "next/link";
+import { useSubjectProgress } from "@/hooks/use-progress";
+import { ALL_SUBJECTS_DATA } from "@/lib/mock-data";
+import type { Subject } from "@/types";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function DashboardPage() {
+  const { getSubjectProgress, isLoadingProgress } = useSubjectProgress();
+
+  const subjectsToShowOnDashboard: Subject[] = ALL_SUBJECTS_DATA.slice(0, 3); // Show first 3
+
+  const overallProgress = () => {
+    if (isLoadingProgress || ALL_SUBJECTS_DATA.length === 0) return 0;
+    const totalProgress = ALL_SUBJECTS_DATA.reduce((sum, subject) => sum + (getSubjectProgress(subject.id) || 0), 0);
+    return Math.round(totalProgress / ALL_SUBJECTS_DATA.length);
+  };
+  
+  const overallProgressValue = overallProgress();
+
   return (
     <>
       <PageHeader title="Dashboard" />
@@ -16,40 +33,50 @@ export default function DashboardPage() {
             <CardDescription>Continue sua jornada de aprendizado e prepare-se para o sucesso.</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>Aqui você encontra um resumo do seu progresso e acesso rápido às principais seções.</p>
+            <p className="mb-2">Seu progresso geral nas trilhas de estudo:</p>
+            {isLoadingProgress ? (
+              <Skeleton className="h-6 w-1/2 mb-1" />
+            ) : (
+              <>
+                <Progress value={overallProgressValue} aria-label={`Progresso geral: ${overallProgressValue}%`} className="h-6 mb-1" />
+                <p className="text-right text-sm text-muted-foreground">{overallProgressValue}% Concluído</p>
+              </>
+            )}
           </CardContent>
         </Card>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card className="shadow-md">
             <CardHeader>
-              <CardTitle>Progresso Geral</CardTitle>
-              <CardDescription>Sua evolução nas trilhas de estudo.</CardDescription>
+              <CardTitle>Resumo do Progresso</CardTitle>
+              <CardDescription>Sua evolução em algumas matérias.</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span>Português</span>
-                    <span className="text-sm text-muted-foreground">75%</span>
-                  </div>
-                  <Progress value={75} aria-label="Progresso em Português: 75%" />
+              {isLoadingProgress ? (
+                <div className="space-y-4">
+                  {Array.from({length: 3}).map((_, i) => (
+                    <div key={i}>
+                      <Skeleton className="h-4 w-1/3 mb-1" />
+                      <Skeleton className="h-4 w-full" />
+                    </div>
+                  ))}
                 </div>
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span>Matemática</span>
-                    <span className="text-sm text-muted-foreground">50%</span>
-                  </div>
-                  <Progress value={50} aria-label="Progresso em Matemática: 50%" />
+              ) : (
+                <div className="space-y-4">
+                  {subjectsToShowOnDashboard.map(subject => {
+                    const progress = getSubjectProgress(subject.id);
+                    return (
+                      <div key={subject.id}>
+                        <div className="flex justify-between mb-1">
+                          <span>{subject.name}</span>
+                          <span className="text-sm text-muted-foreground">{progress || 0}%</span>
+                        </div>
+                        <Progress value={progress || 0} aria-label={`Progresso em ${subject.name}: ${progress || 0}%`} />
+                      </div>
+                    );
+                  })}
                 </div>
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <span>História</span>
-                    <span className="text-sm text-muted-foreground">20%</span>
-                  </div>
-                  <Progress value={20} aria-label="Progresso em História: 20%" />
-                </div>
-              </div>
+              )}
             </CardContent>
             <CardFooter>
               <Button variant="outline" asChild className="w-full">

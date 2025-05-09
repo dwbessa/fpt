@@ -16,24 +16,26 @@ const AnalyzeExamPerformanceInputSchema = z.object({
   examResults: z
     .string()
     .describe(
-      'The mock exam results as a string.  Include the subject and score (e.g., Math: 75, History: 82).'
+      'The mock exam results as a string. Format: "Matéria1: Acertos/Total, Matéria2: Acertos/Total" (e.g., Matemática: 7/10, Português: 5/8).'
     ),
   studentGoals: z
     .string()
+    .optional() // Made studentGoals optional
     .describe(
-      'The student goals for the exam, e.g., get above 80 in all subjects.'
+      '(Opcional) Os objetivos do estudante para o exame, e.g., obter acima de 80 em todas as matérias, focar em exatas.'
     ),
 });
 export type AnalyzeExamPerformanceInput = z.infer<typeof AnalyzeExamPerformanceInputSchema>;
 
 const AnalyzeExamPerformanceOutputSchema = z.object({
-  strengths: z.string().describe('A summary of the student’s strengths based on the exam results.'),
-  weaknesses: z.string().describe('A summary of the student’s weaknesses based on the exam results.'),
+  strengths: z.string().describe('Um resumo dos pontos fortes do estudante com base nos resultados do exame.'),
+  weaknesses: z.string().describe('Um resumo dos pontos fracos do estudante com base nos resultados do exame.'),
   recommendations: z
     .string()
     .describe(
-      'Personalized study recommendations for the student, focusing on areas for improvement.'
+      'Recomendações de estudo personalizadas para o estudante, focando nas áreas de melhoria. As recomendações devem ser acionáveis e específicas.'
     ),
+  generalFeedback: z.string().describe('Um feedback geral sobre o desempenho e dicas para os próximos passos.')
 });
 export type AnalyzeExamPerformanceOutput = z.infer<typeof AnalyzeExamPerformanceOutputSchema>;
 
@@ -47,21 +49,24 @@ const prompt = ai.definePrompt({
   name: 'analyzeExamPerformancePrompt',
   input: {schema: AnalyzeExamPerformanceInputSchema},
   output: {schema: AnalyzeExamPerformanceOutputSchema},
-  prompt: `You are an expert academic advisor. A student has provided their mock exam results and their goals for the exam. Analyze their performance and provide personalized feedback.
+  prompt: `Você é um orientador acadêmico especialista em preparação para o vestibular. Um estudante forneceu os resultados do seu simulado. Analise o desempenho e forneça um feedback personalizado e detalhado.
 
-Exam Results: {{{examResults}}}
-Student Goals: {{{studentGoals}}}
+Resultados do Simulado (formato: Matéria: Acertos/Total de Questões):
+{{{examResults}}}
 
-Provide a summary of their strengths, weaknesses, and personalized study recommendations to help them achieve their goals.
+{{#if studentGoals}}
+Objetivos do Estudante:
+{{{studentGoals}}}
+{{/if}}
 
-Strengths:
-{{output strengths}}
+Com base nos resultados:
+1.  Identifique os **Pontos Fortes**: matérias ou tópicos onde o estudante demonstrou bom conhecimento.
+2.  Identifique os **Pontos a Melhorar**: matérias ou tópicos onde o desempenho foi mais baixo e que necessitam de mais atenção.
+3.  Forneça **Recomendações de Estudo Personalizadas**: sugira estratégias de estudo específicas para as áreas de fraqueza, como focar em certos tipos de problemas, revisar conceitos chave, ou utilizar recursos específicos. As recomendações devem ser práticas e úteis.
+4.  Forneça um **Feedback Geral**: uma mensagem encorajadora com dicas sobre como manter a motivação e planejar os próximos passos nos estudos.
 
-Weaknesses:
-{{output weaknesses}}
-
-Recommendations:
-{{output recommendations}}`,
+Seja claro, objetivo e motivador. Formate a saída conforme o schema JSON esperado.
+`,
 });
 
 const analyzeExamPerformanceFlow = ai.defineFlow(
@@ -72,6 +77,9 @@ const analyzeExamPerformanceFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error("A IA não conseguiu gerar uma análise. Tente novamente.");
+    }
+    return output;
   }
 );
