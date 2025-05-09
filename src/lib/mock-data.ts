@@ -1,3 +1,4 @@
+
 // src/lib/mock-data.ts
 import type { Subject, Question } from '@/types';
 import { Languages, Calculator, Globe2, ScrollText, Atom, FlaskConical, Leaf } from 'lucide-react';
@@ -143,6 +144,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     IconComponent: Globe2,
     href: '/subject-trails/geography',
     iconColor: 'text-yellow-500',
+    lessonsCount: 10,
+    exercisesCount: 15,
     questionsForPractice: [
       {
         id: 'geo_q1',
@@ -181,6 +184,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     IconComponent: Atom,
     href: '/subject-trails/physics',
     iconColor: 'text-purple-500',
+    lessonsCount: 12,
+    exercisesCount: 20,
     questionsForPractice: [
       {
         id: 'phy_q1',
@@ -219,6 +224,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     IconComponent: FlaskConical,
     href: '/subject-trails/chemistry',
     iconColor: 'text-red-500',
+    lessonsCount: 11,
+    exercisesCount: 22,
     questionsForPractice: [
       {
         id: 'chem_q1',
@@ -257,6 +264,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     IconComponent: Leaf,
     href: '/subject-trails/biology',
     iconColor: 'text-teal-500',
+    lessonsCount: 14,
+    exercisesCount: 25,
     questionsForPractice: [
       {
         id: 'bio_q1',
@@ -307,3 +316,5 @@ export const getAllExamQuestions = (): Question[] => {
     return acc;
   }, [] as Question[]);
 };
+
+    

@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, type FormEvent, useEffect } from 'react';
@@ -12,6 +13,7 @@ import { analyzeExamPerformance, type AnalyzeExamPerformanceOutput } from '@/ai/
 import { useToast } from "@/hooks/use-toast";
 import { useMockExams } from '@/hooks/use-progress';
 import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton'; // Corrected import path
 
 export default function PerformanceAnalysisPage() {
   const [examResults, setExamResults] = useState('');
@@ -234,3 +236,5 @@ export default function PerformanceAnalysisPage() {
     </>
   );
 }
+
+    
