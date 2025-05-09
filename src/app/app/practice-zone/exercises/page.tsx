@@ -1,5 +1,5 @@
-// src/app/practice-zone/exercises/page.tsx
-"use client"; // This page is interactive, so it's a Client Component
+// src/app/app/practice-zone/exercises/page.tsx
+"use client"; 
 
 import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,10 +9,9 @@ import Link from "next/link";
 import { ALL_SUBJECTS_DATA } from "@/lib/mock-data";
 import type { Subject } from "@/types";
 import { cn } from "@/lib/utils";
-import { DynamicIcon } from "@/components/icons/dynamic-icon"; // Import DynamicIcon
+import { DynamicIcon } from "@/components/icons/dynamic-icon"; 
 
 export default function ExercisesSubjectsPage() {
-  // ALL_SUBJECTS_DATA is now directly usable as it contains iconName (string)
   const subjects: Subject[] = ALL_SUBJECTS_DATA;
 
   return (
@@ -29,7 +28,6 @@ export default function ExercisesSubjectsPage() {
           {subjects.map((subject: Subject) => (
             <Card key={subject.id} className="shadow-md hover:shadow-lg transition-shadow flex flex-col">
               <CardHeader className="items-center text-center">
-                {/* Use DynamicIcon component */}
                 <DynamicIcon 
                   name={subject.iconName} 
                   className={cn("h-12 w-12 mb-3", subject.iconColor || 'text-primary')} 
@@ -49,7 +47,8 @@ export default function ExercisesSubjectsPage() {
                   className="w-full" 
                   disabled={!subject.questionsForPractice || subject.questionsForPractice.length === 0}
                 >
-                  <Link href={`/practice-zone/exercises/${subject.id}`}>
+                  {/* Updated link path */}
+                  <Link href={`/app/practice-zone/exercises/${subject.id}`}>
                     Praticar {subject.name} <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>

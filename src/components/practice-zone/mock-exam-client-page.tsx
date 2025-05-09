@@ -10,9 +10,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle, XCircle, Lightbulb, ChevronsRight, ChevronsLeft, Send, RotateCcw } from 'lucide-react';
 import { useMockExams, useSubjectProgress } from '@/hooks/use-progress';
-import { getSubjectById } from '@/lib/mock-data'; // Removed ALL_SUBJECTS_DATA as it's not directly used here
+import { getSubjectById } from '@/lib/mock-data';
 import Link from 'next/link';
-import { cn } from '@/lib/utils'; // Added missing import for cn
+import { cn } from '@/lib/utils'; 
 import { Separator } from '../ui/separator';
 
 
@@ -141,7 +141,7 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
         <CardContent><p>Nenhuma questão disponível para o simulado no momento.</p></CardContent>
          <CardFooter>
             <Button variant="outline" asChild>
-                <Link href="/practice-zone">Voltar para Zona de Prática</Link>
+                <Link href="/app/practice-zone">Voltar para Zona de Prática</Link> {/* Updated link */}
             </Button>
         </CardFooter>
       </Card>
@@ -214,17 +214,17 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
           </div>
 
         </CardContent>
-        <CardFooter className="flex flex-col sm:flex-row justify-center gap-4 pt-6">
+        <CardFooter className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 flex-wrap">
           <Button onClick={handleResetExam} variant="outline">
             <RotateCcw className="mr-2 h-4 w-4" /> Fazer Novo Simulado
           </Button>
           <Button asChild>
-            <Link href="/performance-analysis">
+            <Link href="/app/performance-analysis"> {/* Updated link */}
               Analisar meu Desempenho <ChevronsRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
            <Button asChild variant="link">
-            <Link href="/practice-zone">Voltar para Zona de Prática</Link>
+            <Link href="/app/practice-zone">Voltar para Zona de Prática</Link> {/* Updated link */}
           </Button>
         </CardFooter>
       </Card>

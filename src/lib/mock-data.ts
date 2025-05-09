@@ -1,15 +1,13 @@
 // src/lib/mock-data.ts
 import type { Subject, Question } from '@/types';
-// Lucide icons are no longer directly referenced here for IconComponent
-// They will be resolved by name in a client component.
 
 export const ALL_SUBJECTS_DATA: Subject[] = [
   {
     id: 'portuguese',
     name: 'Português',
     description: 'Língua portuguesa, literatura e interpretação de textos.',
-    iconName: 'Languages', // Changed from IconComponent
-    href: '/subject-trails/portuguese',
+    iconName: 'Languages', 
+    href: '/app/subject-trails/portuguese', // Updated href
     iconColor: 'text-blue-500',
     lessonsCount: 10,
     exercisesCount: 20,
@@ -61,8 +59,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'math',
     name: 'Matemática',
     description: 'Números, álgebra, geometria e raciocínio lógico.',
-    iconName: 'Calculator', // Changed from IconComponent
-    href: '/subject-trails/math',
+    iconName: 'Calculator', 
+    href: '/app/subject-trails/math', // Updated href
     iconColor: 'text-green-500',
     lessonsCount: 15,
     exercisesCount: 30,
@@ -101,8 +99,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'history',
     name: 'História',
     description: 'Eventos passados, civilizações e transformações sociais.',
-    iconName: 'ScrollText', // Changed from IconComponent
-    href: '/subject-trails/history',
+    iconName: 'ScrollText', 
+    href: '/app/subject-trails/history', // Updated href
     iconColor: 'text-orange-500',
     lessonsCount: 12,
     exercisesCount: 18,
@@ -141,8 +139,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'geography',
     name: 'Geografia',
     description: 'Estudo do espaço terrestre, paisagens e relações sociedade-natureza.',
-    iconName: 'Globe2', // Changed from IconComponent
-    href: '/subject-trails/geography',
+    iconName: 'Globe2', 
+    href: '/app/subject-trails/geography', // Updated href
     iconColor: 'text-yellow-500',
     lessonsCount: 10,
     exercisesCount: 15,
@@ -181,8 +179,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'physics',
     name: 'Física',
     description: 'Leis do universo, movimento, energia e matéria.',
-    iconName: 'Atom', // Changed from IconComponent
-    href: '/subject-trails/physics',
+    iconName: 'Atom', 
+    href: '/app/subject-trails/physics', // Updated href
     iconColor: 'text-purple-500',
     lessonsCount: 12,
     exercisesCount: 20,
@@ -221,8 +219,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'chemistry',
     name: 'Química',
     description: 'Substâncias, suas propriedades, composições e transformações.',
-    iconName: 'FlaskConical', // Changed from IconComponent
-    href: '/subject-trails/chemistry',
+    iconName: 'FlaskConical', 
+    href: '/app/subject-trails/chemistry', // Updated href
     iconColor: 'text-red-500',
     lessonsCount: 11,
     exercisesCount: 22,
@@ -261,8 +259,8 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'biology',
     name: 'Biologia',
     description: 'Estudo da vida, seres vivos, evolução e ecossistemas.',
-    iconName: 'Leaf', // Changed from IconComponent
-    href: '/subject-trails/biology',
+    iconName: 'Leaf', 
+    href: '/app/subject-trails/biology', // Updated href
     iconColor: 'text-teal-500',
     lessonsCount: 14,
     exercisesCount: 25,
@@ -316,5 +314,3 @@ export const getAllExamQuestions = (): Question[] => {
     return acc;
   }, [] as Question[]);
 };
-
-    

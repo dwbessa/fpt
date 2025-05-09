@@ -8,7 +8,7 @@ const practiceOptions = [
     title: 'Exercícios Reais', 
     description: 'Pratique com questões focadas em tópicos específicos para reforçar seu aprendizado em cada matéria.',
     IconComponent: ClipboardList, 
-    href: '/practice-zone/exercises', // Updated href
+    href: '/app/practice-zone/exercises', // Updated href
     buttonText: 'Resolver Exercícios',
     iconColor: 'text-primary',
     buttonClassName: 'bg-primary hover:bg-primary/90'
@@ -18,7 +18,7 @@ const practiceOptions = [
     title: 'Simulados Completos', 
     description: 'Teste seu conhecimento em um ambiente similar ao exame real. Receba feedback personalizado para guiar seus estudos.',
     IconComponent: FileText, 
-    href: '/practice-zone/mock-exams/start', // Updated href
+    href: '/app/practice-zone/mock-exams/start', // Updated href
     buttonText: 'Fazer Simulado',
     iconColor: 'text-accent',
     buttonClassName: 'bg-accent hover:bg-accent/90 text-accent-foreground'

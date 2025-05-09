@@ -18,10 +18,10 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard, tooltip: 'Dashboard' },
-  { href: '/subject-trails', label: 'Trilhas de Estudo', icon: BookOpenText, tooltip: 'Trilhas de Estudo' },
-  { href: '/practice-zone', label: 'Zona de Prática', icon: Gamepad2, tooltip: 'Zona de Prática' },
-  { href: '/performance-analysis', label: 'Análise de Desempenho', icon: BarChartBig, tooltip: 'Análise de Desempenho' },
+  { href: '/app/dashboard', label: 'Dashboard', icon: LayoutDashboard, tooltip: 'Dashboard' },
+  { href: '/app/subject-trails', label: 'Trilhas de Estudo', icon: BookOpenText, tooltip: 'Trilhas de Estudo' },
+  { href: '/app/practice-zone', label: 'Zona de Prática', icon: Gamepad2, tooltip: 'Zona de Prática' },
+  { href: '/app/performance-analysis', label: 'Análise de Desempenho', icon: BarChartBig, tooltip: 'Análise de Desempenho' },
 ];
 
 export function SidebarNavItems() {
@@ -33,11 +33,11 @@ export function SidebarNavItems() {
         <SidebarMenuItem key={item.href}>
           <Link href={item.href} passHref legacyBehavior>
             <SidebarMenuButton
-              isActive={pathname === item.href}
+              isActive={pathname === item.href || (item.href !== '/app/dashboard' && pathname.startsWith(item.href))}
               tooltip={{ children: item.tooltip || item.label, side: 'right' }}
               className={cn(
                 "w-full justify-start",
-                pathname === item.href ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                (pathname === item.href || (item.href !== '/app/dashboard' && pathname.startsWith(item.href))) ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
               )}
             >
               <item.icon className="h-5 w-5" />

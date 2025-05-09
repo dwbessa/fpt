@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
-// import { GeistMono } from 'geist/font/mono'; // Removed problematic import
 import './globals.css';
-import { AppLayout } from '@/components/layout/app-layout';
+// Toaster will be included in specific layouts like login and app (authenticated)
 
 export const metadata: Metadata = {
-  title: 'Faculdade para Todos',
-  description: 'Sua plataforma de estudos gamificada para o vestibular.',
+  title: 'Faculdade para Todos - Login',
+  description: 'Acesse sua plataforma de estudos gamificada para o vestibular.',
 };
 
 export default function RootLayout({
@@ -15,11 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${GeistSans.variable} `/* ${GeistMono.variable} */}>
+    <html lang="pt-BR" className={`${GeistSans.variable}`}>
       <body className="antialiased">
-        <AppLayout>
-          {children}
-        </AppLayout>
+        {children}
       </body>
     </html>
   );

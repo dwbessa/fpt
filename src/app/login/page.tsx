@@ -9,41 +9,50 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Logo } from '@/components/logo';
-import { Mail, Lock, Loader2 } from 'lucide-react';
+import { Mail, Lock, Loader2, Chrome } from 'lucide-react'; // Added Chrome for Google icon
 import { useToast } from "@/hooks/use-toast";
+import { Separator } from '@/components/ui/separator';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const handleLoginSuccess = () => {
+    toast({
+      title: 'Login Bem-sucedido!',
+      description: 'Redirecionando para o dashboard...',
+    });
+    router.push('/app/dashboard');
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
 
-    // Simula chamada de API
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
 
-    // Lógica de autenticação mockada
-    // Em um app real, aqui você chamaria sua API de autenticação.
-    // Para fins de demonstração, usaremos credenciais fixas.
-    if (email === 'user@example.com' && password === 'password') {
-      toast({
-        title: 'Login Bem-sucedido!',
-        description: 'Redirecionando para o dashboard...',
-      });
-      // Num app real, você definiria o estado de autenticação (ex: contexto, cookie, sessão)
-      router.push('/'); // Redireciona para o dashboard
+    if (email.trim() !== '' && password.trim() !== '') {
+      handleLoginSuccess();
     } else {
       toast({
         title: 'Erro de Login',
-        description: 'Email ou senha inválidos. Tente novamente.',
+        description: 'Por favor, preencha o email e a senha.',
         variant: 'destructive',
       });
       setIsLoading(false);
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsGoogleLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate Google Sign-In
+    // In a real app, this would involve Google's OAuth flow
+    handleLoginSuccess();
+    // setIsGoogleLoading(false); // Success will navigate away
   };
 
   return (
@@ -53,7 +62,7 @@ export default function LoginPage() {
       </div>
       <Card className="shadow-2xl">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-3xl font-bold">Login</CardTitle>
+          <CardTitle className="text-3xl font-bold">Bem-vindo!</CardTitle>
           <CardDescription>Acesse sua conta para continuar seus estudos.</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
@@ -70,7 +79,7 @@ export default function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="pl-10 text-base py-6"
-                  disabled={isLoading}
+                  disabled={isLoading || isGoogleLoading}
                 />
               </div>
             </div>
@@ -91,20 +100,39 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   className="pl-10 text-base py-6"
-                  disabled={isLoading}
+                  disabled={isLoading || isGoogleLoading}
                 />
               </div>
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4 pt-6">
-            <Button type="submit" className="w-full text-lg py-6" disabled={isLoading}>
+            <Button type="submit" className="w-full text-lg py-6" disabled={isLoading || isGoogleLoading}>
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                   Entrando...
                 </>
               ) : (
-                'Entrar'
+                'Entrar com Email'
+              )}
+            </Button>
+             <div className="relative w-full">
+              <Separator className="my-2" />
+              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-sm text-muted-foreground">
+                OU
+              </span>
+            </div>
+            <Button variant="outline" className="w-full text-lg py-6" onClick={handleGoogleSignIn} disabled={isLoading || isGoogleLoading}>
+              {isGoogleLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  Conectando...
+                </>
+              ) : (
+                <>
+                  <Chrome className="mr-2 h-5 w-5" /> {/* Using Chrome icon as placeholder */}
+                  Entrar com Google
+                </>
               )}
             </Button>
             <div className="text-center text-sm text-muted-foreground">

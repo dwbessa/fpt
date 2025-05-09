@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Info } from "lucide-react";
 import Link from "next/link";
-import { getAllExamQuestions } from "@/lib/mock-data"; // To get total questions
+import { getAllExamQuestions } from "@/lib/mock-data"; 
 
 export default function StartMockExamPage() {
   const totalQuestions = getAllExamQuestions().length;
@@ -33,7 +33,8 @@ export default function StartMockExamPage() {
           </CardContent>
           <CardFooter>
             <Button asChild size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-6">
-              <Link href="/practice-zone/mock-exams/take">
+              {/* Updated link path */}
+              <Link href="/app/practice-zone/mock-exams/take">
                 Começar Simulado Agora <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>

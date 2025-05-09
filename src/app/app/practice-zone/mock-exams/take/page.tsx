@@ -15,7 +15,7 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export default function TakeMockExamPage() {
   const allQuestions = getAllExamQuestions();
-  const shuffledQuestions = shuffleArray(allQuestions); // Shuffle for variety each time
+  const shuffledQuestions = shuffleArray(allQuestions); 
 
   return (
     <>

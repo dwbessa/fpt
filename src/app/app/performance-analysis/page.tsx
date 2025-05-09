@@ -13,7 +13,7 @@ import { analyzeExamPerformance, type AnalyzeExamPerformanceOutput } from '@/ai/
 import { useToast } from "@/hooks/use-toast";
 import { useMockExams } from '@/hooks/use-progress';
 import Link from 'next/link';
-import { Skeleton } from '@/components/ui/skeleton'; // Corrected import path
+import { Skeleton } from '@/components/ui/skeleton'; 
 
 export default function PerformanceAnalysisPage() {
   const [examResults, setExamResults] = useState('');
@@ -166,7 +166,7 @@ export default function PerformanceAnalysisPage() {
                   <Info className="h-4 w-4" />
                   <AlertTitle>Nenhum resultado de simulado encontrado!</AlertTitle>
                   <AlertDescription>
-                    Parece que você ainda não fez nenhum simulado. <Link href="/practice-zone/mock-exams/start" className="underline text-primary hover:text-primary/80">Faça um simulado agora</Link> para obter uma análise automática ou insira seus resultados manualmente acima.
+                    Parece que você ainda não fez nenhum simulado. <Link href="/app/practice-zone/mock-exams/start" className="underline text-primary hover:text-primary/80">Faça um simulado agora</Link> para obter uma análise automática ou insira seus resultados manualmente acima.
                   </AlertDescription>
                 </Alert>
               )}
@@ -236,5 +236,3 @@ export default function PerformanceAnalysisPage() {
     </>
   );
 }
-
-    

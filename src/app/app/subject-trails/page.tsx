@@ -12,7 +12,7 @@ export default function SubjectTrailsPage() {
   const subjectsWithProgress: Subject[] = ALL_SUBJECTS_DATA.map(subject => ({
     ...subject,
     progress: getSubjectProgress(subject.id),
-    href: `/subject-trails/${subject.id}` // Ensure href is correctly set for navigation
+    // href is already correct in mock-data: /app/subject-trails/${subject.id}
   }));
 
   return (

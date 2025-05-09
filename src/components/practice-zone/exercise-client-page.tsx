@@ -12,7 +12,7 @@ import { useSubjectProgress } from '@/hooks/use-progress';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Skeleton } from '../ui/skeleton';
-import { cn } from '@/lib/utils'; // Added missing import
+import { cn } from '@/lib/utils';
 
 interface ExerciseClientPageProps {
   subject: Subject | null;
@@ -27,9 +27,7 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
   const { updateSubjectProgress, getSubjectProgress } = useSubjectProgress();
 
   useEffect(() => {
-    // Shuffle questions or choices if needed on initial load
     setQuestions(initialQuestions);
-    // Initialize answers
     const initialUserAnswers: Record<string, UserAnswer> = {};
     initialQuestions.forEach(q => {
       initialUserAnswers[q.id] = { questionId: q.id, selectedAnswerId: null };
@@ -74,13 +72,10 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
     setScore(newScore);
     setSubmitted(true);
 
-    // Update overall subject progress, could be more sophisticated (e.g. average of attempts)
     const currentProgress = getSubjectProgress(subject.id);
-    // Simple progress update: if they did better or it's their first time significant score
     if (newScore > currentProgress || (currentProgress === 0 && newScore > 10) ) {
        updateSubjectProgress(subject.id, Math.max(currentProgress, newScore));
     } else if (currentProgress < 100 && newScore > 0) {
-      // Small increment for participation if not already 100%
       updateSubjectProgress(subject.id, Math.min(100, currentProgress + 5));
     }
   };
@@ -93,8 +88,6 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
     setUserAnswers(initialUserAnswers);
     setSubmitted(false);
     setScore(0);
-    // Optionally re-shuffle questions if you implement shuffling
-    // setQuestions(shuffleArray([...initialQuestions])); 
   };
   
   if (!questions || questions.length === 0) {
@@ -108,7 +101,7 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
         </CardContent>
         <CardFooter>
             <Button variant="outline" asChild>
-                <Link href="/practice-zone/exercises">Voltar para Matérias</Link>
+                <Link href="/app/practice-zone/exercises">Voltar para Matérias</Link> {/* Updated link */}
             </Button>
         </CardFooter>
       </Card>
@@ -199,7 +192,7 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
        {submitted && (
         <div className="mt-6 text-center">
           <Button asChild variant="link">
-            <Link href="/practice-zone/exercises">Voltar para seleção de matérias</Link>
+            <Link href="/app/practice-zone/exercises">Voltar para seleção de matérias</Link> {/* Updated link */}
           </Button>
         </div>
       )}
