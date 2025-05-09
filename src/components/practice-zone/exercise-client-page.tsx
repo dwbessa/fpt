@@ -1,3 +1,4 @@
+// src/components/practice-zone/exercise-client-page.tsx
 "use client";
 import type { Question, UserAnswer, Subject } from '@/types';
 import { useState, useEffect, FormEvent } from 'react';
@@ -11,6 +12,7 @@ import { useSubjectProgress } from '@/hooks/use-progress';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Skeleton } from '../ui/skeleton';
+import { cn } from '@/lib/utils'; // Added missing import
 
 interface ExerciseClientPageProps {
   subject: Subject | null;
