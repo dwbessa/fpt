@@ -141,7 +141,7 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
         <CardContent><p>Nenhuma questão disponível para o simulado no momento.</p></CardContent>
          <CardFooter>
             <Button variant="outline" asChild>
-                <Link href="/app/practice-zone">Voltar para Zona de Prática</Link> {/* Updated link */}
+                <Link href="/app/practice-zone"><span>Voltar para Zona de Prática</span></Link>
             </Button>
         </CardFooter>
       </Card>
@@ -216,15 +216,21 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 flex-wrap">
           <Button onClick={handleResetExam} variant="outline">
-            <RotateCcw className="mr-2 h-4 w-4" /> Fazer Novo Simulado
+            <span className="inline-flex items-center gap-2">
+              <RotateCcw className="mr-2 h-4 w-4" /> Fazer Novo Simulado
+            </span>
           </Button>
           <Button asChild>
-            <Link href="/app/performance-analysis"> {/* Updated link */}
-              Analisar meu Desempenho <ChevronsRight className="ml-2 h-4 w-4" />
+            <Link href="/app/performance-analysis">
+              <span className="inline-flex items-center gap-2">
+                Analisar meu Desempenho <ChevronsRight className="ml-2 h-4 w-4" />
+              </span>
             </Link>
           </Button>
            <Button asChild variant="link">
-            <Link href="/app/practice-zone">Voltar para Zona de Prática</Link> {/* Updated link */}
+            <Link href="/app/practice-zone">
+              <span>Voltar para Zona de Prática</span>
+            </Link>
           </Button>
         </CardFooter>
       </Card>
@@ -267,15 +273,21 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row justify-between gap-4 sticky bottom-0 bg-background py-4 border-t">
           <Button type="button" variant="outline" onClick={goToPreviousQuestion} disabled={currentQuestionIndex === 0}>
-            <ChevronsLeft className="mr-2 h-4 w-4" /> Anterior
+            <span className="inline-flex items-center gap-2">
+              <ChevronsLeft className="mr-2 h-4 w-4" /> Anterior
+            </span>
           </Button>
           {currentQuestionIndex < questions.length - 1 ? (
             <Button type="button" onClick={goToNextQuestion}>
-              Próxima <ChevronsRight className="ml-2 h-4 w-4" />
+              <span className="inline-flex items-center gap-2">
+                Próxima <ChevronsRight className="ml-2 h-4 w-4" />
+              </span>
             </Button>
           ) : (
             <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white">
-              <Send className="mr-2 h-4 w-4" /> Finalizar Simulado
+              <span className="inline-flex items-center gap-2">
+                <Send className="mr-2 h-4 w-4" /> Finalizar Simulado
+              </span>
             </Button>
           )}
         </CardFooter>
@@ -283,3 +295,4 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
     </form>
   );
 }
+
