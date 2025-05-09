@@ -1,4 +1,8 @@
+
+"use client"; // Add "use client" for useRouter
+
 import type { ReactNode } from 'react';
+import { useRouter } from 'next/navigation'; // Import useRouter
 import {
   SidebarProvider,
   Sidebar,
@@ -19,6 +23,13 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
+  const router = useRouter(); // Initialize useRouter
+
+  const handleLogout = () => {
+    // In a real app, you would also clear any authentication tokens or session data.
+    router.push('/login');
+  };
+
   return (
     <SidebarProvider defaultOpen>
       <Sidebar variant="sidebar" collapsible="icon" side="left" className="border-r">
@@ -35,7 +46,11 @@ export function AppLayout({ children }: AppLayoutProps) {
           <SidebarNavItems />
         </SidebarContent>
         <SidebarFooter className="p-2">
-          <Button variant="ghost" className="w-full justify-start gap-2 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:aspect-square">
+          <Button 
+            variant="ghost" 
+            className="w-full justify-start gap-2 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:aspect-square"
+            onClick={handleLogout} // Add onClick handler
+          >
             <LogOut className="h-5 w-5" />
             <span className="group-data-[collapsible=icon]:hidden">Sair</span>
           </Button>
