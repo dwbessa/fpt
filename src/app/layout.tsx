@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+// import { GeistMono } from 'geist/font/mono'; // Removed problematic import
 import './globals.css';
 import { AppLayout } from '@/components/layout/app-layout';
 
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="pt-BR" className={`${GeistSans.variable} `/* ${GeistMono.variable} */}>
       <body className="antialiased">
         <AppLayout>
           {children}

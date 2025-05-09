@@ -5,7 +5,7 @@ export interface SubjectBase {
   id: string;
   name: string;
   description: string;
-  IconComponent: LucideIcon;
+  iconName: string; // Changed from IconComponent: LucideIcon
   href: string; // Base href for the subject trail page
   iconColor?: string;
 }

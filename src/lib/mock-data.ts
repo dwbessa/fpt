@@ -1,14 +1,14 @@
-
 // src/lib/mock-data.ts
 import type { Subject, Question } from '@/types';
-import { Languages, Calculator, Globe2, ScrollText, Atom, FlaskConical, Leaf } from 'lucide-react';
+// Lucide icons are no longer directly referenced here for IconComponent
+// They will be resolved by name in a client component.
 
 export const ALL_SUBJECTS_DATA: Subject[] = [
   {
     id: 'portuguese',
     name: 'Português',
     description: 'Língua portuguesa, literatura e interpretação de textos.',
-    IconComponent: Languages,
+    iconName: 'Languages', // Changed from IconComponent
     href: '/subject-trails/portuguese',
     iconColor: 'text-blue-500',
     lessonsCount: 10,
@@ -61,7 +61,7 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'math',
     name: 'Matemática',
     description: 'Números, álgebra, geometria e raciocínio lógico.',
-    IconComponent: Calculator,
+    iconName: 'Calculator', // Changed from IconComponent
     href: '/subject-trails/math',
     iconColor: 'text-green-500',
     lessonsCount: 15,
@@ -101,7 +101,7 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'history',
     name: 'História',
     description: 'Eventos passados, civilizações e transformações sociais.',
-    IconComponent: ScrollText,
+    iconName: 'ScrollText', // Changed from IconComponent
     href: '/subject-trails/history',
     iconColor: 'text-orange-500',
     lessonsCount: 12,
@@ -141,7 +141,7 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'geography',
     name: 'Geografia',
     description: 'Estudo do espaço terrestre, paisagens e relações sociedade-natureza.',
-    IconComponent: Globe2,
+    iconName: 'Globe2', // Changed from IconComponent
     href: '/subject-trails/geography',
     iconColor: 'text-yellow-500',
     lessonsCount: 10,
@@ -181,7 +181,7 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'physics',
     name: 'Física',
     description: 'Leis do universo, movimento, energia e matéria.',
-    IconComponent: Atom,
+    iconName: 'Atom', // Changed from IconComponent
     href: '/subject-trails/physics',
     iconColor: 'text-purple-500',
     lessonsCount: 12,
@@ -221,7 +221,7 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'chemistry',
     name: 'Química',
     description: 'Substâncias, suas propriedades, composições e transformações.',
-    IconComponent: FlaskConical,
+    iconName: 'FlaskConical', // Changed from IconComponent
     href: '/subject-trails/chemistry',
     iconColor: 'text-red-500',
     lessonsCount: 11,
@@ -261,7 +261,7 @@ export const ALL_SUBJECTS_DATA: Subject[] = [
     id: 'biology',
     name: 'Biologia',
     description: 'Estudo da vida, seres vivos, evolução e ecossistemas.',
-    IconComponent: Leaf,
+    iconName: 'Leaf', // Changed from IconComponent
     href: '/subject-trails/biology',
     iconColor: 'text-teal-500',
     lessonsCount: 14,

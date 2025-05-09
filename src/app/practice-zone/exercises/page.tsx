@@ -1,4 +1,6 @@
-"use client";
+// src/app/practice-zone/exercises/page.tsx
+"use client"; // This page is interactive, so it's a Client Component
+
 import { PageHeader } from "@/components/layout/page-header";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,8 +9,12 @@ import Link from "next/link";
 import { ALL_SUBJECTS_DATA } from "@/lib/mock-data";
 import type { Subject } from "@/types";
 import { cn } from "@/lib/utils";
+import { DynamicIcon } from "@/components/icons/dynamic-icon"; // Import DynamicIcon
 
 export default function ExercisesSubjectsPage() {
+  // ALL_SUBJECTS_DATA is now directly usable as it contains iconName (string)
+  const subjects: Subject[] = ALL_SUBJECTS_DATA;
+
   return (
     <>
       <PageHeader title="Exercícios por Matéria" />
@@ -20,10 +26,14 @@ export default function ExercisesSubjectsPage() {
           </CardHeader>
         </Card>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {ALL_SUBJECTS_DATA.map((subject: Subject) => (
+          {subjects.map((subject: Subject) => (
             <Card key={subject.id} className="shadow-md hover:shadow-lg transition-shadow flex flex-col">
               <CardHeader className="items-center text-center">
-                <subject.IconComponent className={cn("h-12 w-12 mb-3", subject.iconColor || 'text-primary')} />
+                {/* Use DynamicIcon component */}
+                <DynamicIcon 
+                  name={subject.iconName} 
+                  className={cn("h-12 w-12 mb-3", subject.iconColor || 'text-primary')} 
+                />
                 <CardTitle className="text-lg">{subject.name}</CardTitle>
               </CardHeader>
               <CardContent className="flex-grow">

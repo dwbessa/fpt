@@ -1,21 +1,26 @@
-import type { LucideIcon } from 'lucide-react';
+// src/components/subject-trails/subject-card.tsx
 import Link from 'next/link';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, BookCopy, ListChecks } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Progress } from '@/components/ui/progress';
-import type { Subject as SubjectType } from '@/types'; // Renamed to avoid conflict
+import type { Subject as SubjectType } from '@/types';
+import { DynamicIcon } from '@/components/icons/dynamic-icon'; // Import DynamicIcon
 
 export interface SubjectCardProps {
-  subject: SubjectType; // Use the imported SubjectType
+  subject: SubjectType;
 }
 
 export function SubjectCard({ subject }: SubjectCardProps) {
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
       <CardHeader className="items-center text-center">
-        <subject.IconComponent className={cn("h-16 w-16 mb-4", subject.iconColor || 'text-primary')} />
+        {/* Use DynamicIcon component */}
+        <DynamicIcon 
+          name={subject.iconName} 
+          className={cn("h-16 w-16 mb-4", subject.iconColor || 'text-primary')} 
+        />
         <CardTitle className="text-xl">{subject.name}</CardTitle>
       </CardHeader>
       <CardContent className="flex-grow">

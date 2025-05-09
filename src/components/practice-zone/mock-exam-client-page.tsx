@@ -1,3 +1,4 @@
+// src/components/practice-zone/mock-exam-client-page.tsx
 "use client";
 import type { Question, UserAnswer, MockExamSubjectResult, MockExamAttempt } from '@/types';
 import { useState, useEffect, FormEvent } from 'react';
@@ -9,8 +10,11 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 import { CheckCircle, XCircle, Lightbulb, ChevronsRight, ChevronsLeft, Send, RotateCcw } from 'lucide-react';
 import { useMockExams, useSubjectProgress } from '@/hooks/use-progress';
-import { getSubjectById, ALL_SUBJECTS_DATA } from '@/lib/mock-data';
+import { getSubjectById } from '@/lib/mock-data'; // Removed ALL_SUBJECTS_DATA as it's not directly used here
 import Link from 'next/link';
+import { cn } from '@/lib/utils'; // Added missing import for cn
+import { Separator } from '../ui/separator';
+
 
 interface MockExamClientPageProps {
   questions: Question[];
@@ -27,8 +31,6 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
   const { updateSubjectProgress, getSubjectProgress } = useSubjectProgress();
 
   useEffect(() => {
-    // Shuffle questions on initial load (optional, but good for variety)
-    // For simplicity, not shuffling now to keep question order consistent for AI analysis format
     setQuestions(initialQuestions); 
     const initialUserAnswers: Record<string, UserAnswer> = {};
     initialQuestions.forEach(q => {
@@ -79,9 +81,9 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
       if (userAnswer && userAnswer.selectedAnswerId === q.correctAnswerId) {
         subjectScores[q.subjectId].correct++;
         totalCorrectAnswers++;
-        userAnswers[q.id].isCorrect = true; // Mark answer as correct
+        userAnswers[q.id].isCorrect = true; 
       } else if (userAnswer) {
-        userAnswers[q.id].isCorrect = false; // Mark answer as incorrect
+        userAnswers[q.id].isCorrect = false; 
       }
     });
 
@@ -112,11 +114,9 @@ export function MockExamClientPage({ questions: initialQuestions }: MockExamClie
     addExamAttempt(attempt);
     setSubmitted(true);
 
-    // Update individual subject progress based on exam performance
     examResults.forEach(res => {
       const subjectProgress = res.totalQuestions > 0 ? Math.round((res.score / res.totalQuestions) * 100) : 0;
       const currentProgress = getSubjectProgress(res.subjectId);
-      // Update if exam score is better or a significant first score
       if (subjectProgress > currentProgress || (currentProgress === 0 && subjectProgress > 10)) {
         updateSubjectProgress(res.subjectId, Math.max(currentProgress, subjectProgress));
       }
