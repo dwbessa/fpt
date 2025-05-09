@@ -181,12 +181,16 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
 
       <CardFooter className="flex flex-col sm:flex-row justify-between gap-4 sticky bottom-0 bg-background py-4 border-t">
         <Button type="button" variant="outline" onClick={handleReset} disabled={!submitted && Object.values(userAnswers).every(a => a.selectedAnswerId === null)}>
-          <RotateCcw className="mr-2 h-4 w-4" />
-          {submitted ? "Tentar Novamente" : "Limpar Respostas"}
+          <span className="inline-flex items-center gap-2">
+            <RotateCcw className="mr-2 h-4 w-4" />
+            {submitted ? "Tentar Novamente" : "Limpar Respostas"}
+          </span>
         </Button>
         <Button type="submit" disabled={submitted || Object.values(userAnswers).some(a => a.selectedAnswerId === null)} className="bg-primary hover:bg-primary/90">
-           <Send className="mr-2 h-4 w-4" />
-          {submitted ? "Resultados Enviados" : "Corrigir Exercícios"}
+           <span className="inline-flex items-center gap-2">
+            <Send className="mr-2 h-4 w-4" />
+            {submitted ? "Resultados Enviados" : "Corrigir Exercícios"}
+          </span>
         </Button>
       </CardFooter>
        {submitted && (
