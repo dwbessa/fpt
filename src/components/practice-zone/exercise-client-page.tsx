@@ -102,7 +102,7 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
         </CardContent>
         <CardFooter>
             <Button variant="outline" asChild>
-                <Link href="/app/practice-zone/exercises"><span>Voltar para Matérias</span></Link> {/* Updated link */}
+                <Link href="/app/practice-zone/exercises"><span>Voltar para Matérias</span></Link>
             </Button>
         </CardFooter>
       </Card>
@@ -197,7 +197,7 @@ export function ExerciseClientPage({ subject, questions: initialQuestions }: Exe
        {submitted && (
         <div className="mt-6 text-center">
           <Button asChild variant="link">
-            <Link href="/app/practice-zone/exercises"><span>Voltar para seleção de matérias</span></Link> {/* Updated link */}
+            <Link href="/app/practice-zone/exercises"><span>Voltar para seleção de matérias</span></Link>
           </Button>
         </div>
       )}
